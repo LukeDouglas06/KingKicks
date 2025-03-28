@@ -1,3 +1,21 @@
+<?php
+session_start(); // Start the session at the top of the file
+
+include 'C:\laragon\www\KingKicks\DBconfig.php'; // Include database connection
+include 'C:\laragon\www\KingKicks\classes.php'; // Include classes
+// Fetch recently searched products
+$sql_recent = "SELECT * FROM products";
+$stmt_recent = $conn->query($sql_recent);
+$recent_products = $stmt_recent->fetch_all(MYSQLI_ASSOC);
+$trending_products = $stmt_recent->fetch_all(MYSQLI_ASSOC);
+// Check if the cart exists and is valid
+if (isset($_SESSION['cart']) && $_SESSION['cart'] instanceof Cart) {
+    $cart_count = count($_SESSION['cart']->getProducts());
+} else {
+    $cart_count = 0; // Default to 0 if the cart is not valid
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +26,7 @@
     <script src="js/home.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
+
     <header>
         <section class="nav">
             <ul>
@@ -27,49 +45,45 @@
                 <li><a href="new.php">New</a></li>
                 <li><a href="sale.php">Sale</a></li>
                 <li><input type="text" placeholder="Search"></li>
-                <li><a href="signup.php"><img src="images/login.png" width="50" height="50"></a></li>
-                <li><img src="images/cart.png" width="50" height="50"></li>
+                <li>
+                    <?php if (isset($_SESSION['username'])): ?>
+                        <a href="profile.php">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></a>
+                        <a href="logout.php" class="logout-button">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php"><img src="images/login.png" width="50" height="50"></a>
+                    <?php endif; ?>
+                </li>
+                <li><a href="cart.php"><img src="images/cart.png" width="50" height="50" alt="Cart">
+                <span class="cart-count"><?php echo $cart_count; ?></span></a></li>
             </ul>
         </section>
     </header>
+    <body>
     <h2>Recently Searched Products</h2>
     <section class="recently">
-        <div class="product-box">
-            <a href="shoe1.php"><img src="images/shoes1-Photoroom.png" alt="Image 1"></a>
-            <div class="price">€135</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe2.php"><img src="images/shoes2-Photoroom.png" alt="Image 2"></a>
-            <div class="price">€115</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe3.php"><img src="images/shoes3-Photoroom.png" alt="Image 3"></a>
-            <div class="price">€115</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe4.php"><img src="images/shoes4-Photoroom.png" alt="Image 4"></a>
-            <div class="price">€399</div>
-        </div>
+        <?php foreach ($recent_products as $product): ?>
+            <div class="product-box">
+                <a href="shoe<?php echo $product['PRODUCT_ID']; ?>.php">
+                    <img src="/KingKicks/images/<?php echo $product['image']; ?>" alt="<?php echo $product['PRODUCT_NAME']; ?>">
+                </a>
+                <div class="price">€<?php echo $product['PRICE']; ?></div>
+            </div>
+        <?php endforeach; ?>
     </section>
-    <h2>Trending Right Now 🔥</h2>
+    
+    </section>
+    <h2></h2>
     <section class="trending">
-        <div class="product-box">
-            <a href="shoe5.php"><img src="images/shoes5-Photoroom.png" alt="Image 1"></a>
-            <div class="price">€899</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe6.php"><img src="images/shoes6-Photoroom.png" alt="Image 2"></a>
-            <div class="price">€210</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe7.php"><img src="images/shoes7-Photoroom.png" alt="Image 3"></a>
-            <div class="price">€115</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe8.php"><img src="images/shoes8-Photoroom.png" alt="Image 4"></a>
-            <div class="price">€1,729</div>
-        </div>
+    <?php foreach ($trending_products as $product): ?>
+            <div class="product-box">
+                <a href="shoe<?php echo $product['PRODUCT_ID']; ?>.php">
+                    <img src="images/<?php echo $product['image']; ?>" alt="<?php echo $product['PRODUCT_NAME']; ?>">
+                </a>
+                <div class="price">€<?php echo $product['PRICE']; ?></div>
+            </div>
+        <?php endforeach; ?>
     </section>
+    
     <footer>
         <div class="footer-content">
             <ul>

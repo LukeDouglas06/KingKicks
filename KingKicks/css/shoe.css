@@ -229,38 +229,29 @@ a:hover {
     background-color: white;
     color: rgb(221, 30, 157);
 }
-.trending {
-    display: flex;
-    justify-content: space-around; /* Distribute images evenly */
-    align-items: center; /* Center images vertically */
-    padding: 0; /* Optional: Add some padding */
-    margin: 0;
+.size-button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.trending img {
-    width: 100px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0px; /* Reduce the margin between images */
+.size-button:hover {
+    background-color: #e0e0e0;
 }
 
-.product-box {
-    border: none; /* Remove the border */
-    padding: 10px; /* Add some padding inside the box */
-    text-align: center; /* Center the content */
-    width: 150px; /* Set a fixed width for the product box */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
-    margin: 0;
+.size-button.selected {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
 }
 
-.product-box img {
-    width: 100%; /* Make the image fill the box width */
-    height: auto; /* Maintain aspect ratio */
-}
-
-.product-box .price {
-    margin-top: 10px; /* Add some space above the price */
-    font-weight: bold; /* Make the price text bold */
-    color: #333; /* Set the color of the price text */
+.size-button:disabled {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
 }
 .footer-content h3 {
     text-align: center;

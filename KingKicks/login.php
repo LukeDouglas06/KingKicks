@@ -1,15 +1,10 @@
-<?php
-session_start();
-include 'DBconfig.php';
-include 'classes.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>King Kicks</title>
-    <link rel="stylesheet" href="css/shoe.css">
+    <link rel="stylesheet" href="css/signup.css">
     <script src="js/home.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -43,54 +38,28 @@ include 'classes.php';
                 <li><a href="cart.php"><img src="images/cart.png" width="50" height="50" alt="Cart"></a></li>
             </ul>
         </section>
-    <div class="shoe">
-        <div class="image">
-            <img src="images/yshoes8-Photoroom.png" alt="adidas Yeezy QNTM Sea Teal">
-        </div>
-        <div class="description">
-            <h2>adidas Yeezy QNTM Sea Teal</h2>    
-            <h2>€75</h2>
-            <p>The Adidas Yeezy Boost 350 V2 is a stylish and comfortable sneaker designed by Kanye West and Adidas.
-                It features a Primeknit upper, a signature side stripe,
-                and a Boost midsole for cushioning.
-                Known for its sleek design and various colorways, 
-                it's a popular choice among sneaker enthusiasts.
-            </p>
-            <p class="stock">✅ Currently in stock</p>
-        </div>
+    <div class="form-container">
+            <h1>Login</h1>
+            <form action="login_process.php" method="post">
+            <label class="formcolor" for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <br>
+            <label class="formcolor" for="password">Password:</label>
+            <input type="text" id="password" name="password" required>
+            <br>
+            <br>
+
+            <button type="submit">Login</button>
+        </form>
+        <br>
+                <!-- Add a button to redirect to the register page -->
+        <button onclick="window.location.href='signup.php';">Sing Up</button>
     </div>
-    <div class="size">
-        <h2>Size</h2>
-        <button>6</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>10</button>
-        <button>11</button>
-        <button>12</button>
-    </div>
-    <div class="add">
-        <button>Add to Cart</button>
-    </div>
-    <h2>Customers Also Liked..</h2>
-    <section class="trending">
-        <div class="product-box">
-            <a href="shoe4.php"><img src="images/shoes4-Photoroom.png" alt="Image 1">
-            <div class="price">€399</div>
-        </div>
-        <div class="product-box">
-            <a href="yshoe3.php"><img src="images/yshoes3-Photoroom.png" alt="Image 2">
-            <div class="price">€115</div>
-        </div>
-        <div class="product-box">
-            <a href="shoe7.php"><img src="images/shoes7-Photoroom.png" alt="Image 3">
-            <div class="price">€115</div>
-        </div>
-        <div class="product-box">
-            <a href="yshoe1.php"><img src="images/yshoes8-Photoroom.png" alt="Image 4">
-            <div class="price">€115</div>
-        </div>
-    </section>
     <footer>
         <div class="footer-content">
             <ul>
